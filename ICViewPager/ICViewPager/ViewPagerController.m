@@ -182,7 +182,7 @@
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _kTabWidth = self.view.bounds.size.width/2;
+    _kTabWidth = [UIScreen mainScreen].bounds.size.width/2;
 }
 - (void)viewWillAppear:(BOOL)animated {
     
