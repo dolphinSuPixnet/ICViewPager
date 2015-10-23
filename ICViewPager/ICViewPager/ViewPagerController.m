@@ -15,7 +15,7 @@
 
 #define kTabHeight 44.0
 #define kTabOffset 56.0
-//#define kTabWidth 128.0
+#define kTabWidth 128.0
 #define kTabLocation 1.0
 #define kStartFromSecondTab 0.0
 #define kCenterCurrentTab 0.0
@@ -119,8 +119,6 @@
 @property UIScrollView *tabsView;
 @property UIView *contentView;
 
-@property (nonatomic, assign) CGFloat kTabWidth;
-
 @property UIPageViewController *pageViewController;
 @property (assign) id<UIScrollViewDelegate> actualDelegate;
 
@@ -182,7 +180,6 @@
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _kTabWidth = [UIScreen mainScreen].bounds.size.width/2;
 }
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -465,7 +462,7 @@
 - (NSNumber *)tabWidth {
     
     if (!_tabWidth) {
-        CGFloat value = _kTabWidth;
+        CGFloat value = kTabWidth;
         if ([self.delegate respondsToSelector:@selector(viewPager:valueForOption:withDefault:)])
             value = [self.delegate viewPager:self valueForOption:ViewPagerOptionTabWidth withDefault:value];
         self.tabWidth = [NSNumber numberWithFloat:value];
@@ -609,7 +606,7 @@
     }
     
     // Update these options
-    self.tabWidth = [NSNumber numberWithFloat:[self.delegate viewPager:self valueForOption:ViewPagerOptionTabWidth withDefault:_kTabWidth]];
+    self.tabWidth = [NSNumber numberWithFloat:[self.delegate viewPager:self valueForOption:ViewPagerOptionTabWidth withDefault:kTabWidth]];
     self.tabOffset = [NSNumber numberWithFloat:[self.delegate viewPager:self valueForOption:ViewPagerOptionTabOffset withDefault:kTabOffset]];
     self.centerCurrentTab = [NSNumber numberWithFloat:[self.delegate viewPager:self valueForOption:ViewPagerOptionCenterCurrentTab withDefault:kCenterCurrentTab]];
     self.fixFormerTabsPositions = [NSNumber numberWithFloat:[self.delegate viewPager:self valueForOption:ViewPagerOptionFixFormerTabsPositions withDefault:kFixFormerTabsPositions]];
